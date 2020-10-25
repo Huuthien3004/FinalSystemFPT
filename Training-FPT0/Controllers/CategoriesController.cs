@@ -17,17 +17,14 @@ namespace Training_FPT0.Controllers
 		}
 		// GET: Category
 		[HttpGet]
-		public ActionResult Index(string searchString)
+		public ActionResult Index(string searchCategory)
 		{
 			var categories = _context.Categories.ToList();
+			if (!String.IsNullOrEmpty(searchCategory))
+			{
+				categories = categories.FindAll(s => s.Name.Contains(searchCategory));
+			}
 			return View(categories);
-		}
-
-
-		[HttpGet]
-		public ActionResult Create()
-		{
-			return View();
 		}
 
 		[HttpPost]
