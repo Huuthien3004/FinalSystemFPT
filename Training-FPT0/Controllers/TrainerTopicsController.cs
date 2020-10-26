@@ -35,7 +35,8 @@ namespace Training_FPT0.Controllers
             }
             return View("Login");
         }
-
+        [HttpGet]
+        [Authorize(Roles = "TrainingStaff")]
         public ActionResult Create()
         {
             //get trainer
@@ -56,6 +57,7 @@ namespace Training_FPT0.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "TrainingStaff")]
         public ActionResult Create(TrainerTopicViewModel model)
         {
             //get trainer
@@ -121,6 +123,7 @@ namespace Training_FPT0.Controllers
 
                 return RedirectToAction("Index", "TrainerTopics");
             }
+        [HttpGet]
 
         [Authorize(Roles = "TrainingStaff")]
         public ActionResult Delete(int id)

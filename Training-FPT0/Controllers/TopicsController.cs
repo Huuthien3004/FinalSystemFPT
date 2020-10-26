@@ -20,6 +20,7 @@ namespace Training_FPT0.Controllers
 		}
 		// GET: Topic
 		[HttpGet]
+		[Authorize(Roles = "TrainingStaff")]
 		public ActionResult Index(string searchString)
 		{
 			var topics = _context.Topics
@@ -35,6 +36,7 @@ namespace Training_FPT0.Controllers
 		}
 
 		[HttpGet]
+				[Authorize(Roles = "TrainingStaff")]
 		public ActionResult Create()
 		{
 			var viewModel = new TopicCourseViewModel
@@ -45,6 +47,7 @@ namespace Training_FPT0.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "TrainingStaff")]
 		public ActionResult Create(Topic topic)
 		{
 			if (!ModelState.IsValid)
@@ -74,6 +77,7 @@ namespace Training_FPT0.Controllers
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "TrainingStaff")]
 		public ActionResult Delete(int id)
 		{
 			var topicInDb = _context.Topics.SingleOrDefault(p => p.Id == id);
@@ -90,6 +94,7 @@ namespace Training_FPT0.Controllers
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "TrainingStaff")]
 		public ActionResult Edit(int id)
 		{
 			var topicInDb = _context.Topics.SingleOrDefault(p => p.Id == id);
@@ -107,6 +112,7 @@ namespace Training_FPT0.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "TrainingStaff")]
 		public ActionResult Edit(Topic topic)
 		{
 			if (!ModelState.IsValid)
@@ -131,6 +137,8 @@ namespace Training_FPT0.Controllers
 			return RedirectToAction("Index");
 		}
 		// GET: Topics/Details/5
+		[HttpGet]
+		[Authorize(Roles = "TrainingStaff")]
 		public ActionResult Details(int id)
 		{
 			var topicInDb = _context.Topics.SingleOrDefault(p => p.Id == id);

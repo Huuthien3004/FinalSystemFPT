@@ -34,11 +34,14 @@ namespace Training_FPT0.Controllers
             }
             return View("Login");
         }
-
+        [HttpGet]
+        [Authorize(Roles = "TrainingStaff")]
         public ActionResult Create()
         {
             //get trainee
+            //declare the variable "role" to construct data from the source table "Roles" in the column "Name" containing "Trainee" then select
             var role = (from r in _context.Roles where r.Name.Contains("Trainee") select r).FirstOrDefault();
+            //declare the variable "user" to contruct data from source table "Users" where In table "UserRole" Containing RoleId of "RoleName" Is "Trainee"
             var users = _context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(role.Id)).ToList();
 
             //get course
@@ -56,6 +59,7 @@ namespace Training_FPT0.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "TrainingStaff")]
         public ActionResult Create(TraineeCourseViewModel model)
         {
             //get trainee
@@ -122,6 +126,7 @@ namespace Training_FPT0.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpGet]
 
         [Authorize(Roles = "TrainingStaff")]
         public ActionResult Delete(int id)
