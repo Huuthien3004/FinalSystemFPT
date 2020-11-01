@@ -21,9 +21,9 @@ namespace Training_FPT0.Controllers
         // GET: ManagerStaffViewModels
         public ActionResult Index()
         {
-            // declare the role variable using the function (FROM-IN) to specify the query data source (Roles).
-            // Look in the name column in the Roles table containing "Trainee" and assign it to the variable
-            var role = (from r in _context.Roles where r.Name.Contains("Trainee") select r).FirstOrDefault();
+        // declare role variable using the function (FROM-IN) to specify the query data source (Roles).
+        // Look in the name column in the Roles table containing "Trainee" and assign it to the variable
+        var role = (from r in _context.Roles where r.Name.Contains("Trainee") select r).FirstOrDefault();
             // declare variable users with function (FROM-IN) to specify the query data source (Users).
             //Find the user in the Users table whose "RoleId" was assigned when registering 
             //containing the "role.Id" selected in the above variable.
@@ -44,10 +44,10 @@ namespace Training_FPT0.Controllers
             // declare variable admins with function (FROM-IN) to specify the query data source (Users).
             //Find the user in the Users table whose "RoleId" was assigned when registering 
             //containing the "role2.Id" selected in the above variable.
-            var users2 = _context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(role2.Id)).ToList();
+            var admins = _context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(role2.Id)).ToList();
             // declare variable adminVM to assign the users selected on the variable "admins"
             //to "ManagerStaffViewModel" to display
-            var user2VM = users2.Select(user => new ManagerStaffViewModel
+            var adminVM = admins.Select(user => new ManagerStaffViewModel
             {
                 UserName = user.UserName,
                 Email = user.Email,
@@ -56,7 +56,7 @@ namespace Training_FPT0.Controllers
             }).ToList();
 
 
-            var model = new ManagerStaffViewModel { Trainee = userVM, Trainer = user2VM };
+            var model = new ManagerStaffViewModel { Trainee = userVM, Trainer = adminVM };
             return View(model);
         }
         [HttpGet]

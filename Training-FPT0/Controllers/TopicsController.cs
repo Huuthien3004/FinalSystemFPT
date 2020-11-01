@@ -36,7 +36,7 @@ namespace Training_FPT0.Controllers
 		}
 
 		[HttpGet]
-				[Authorize(Roles = "TrainingStaff")]
+		[Authorize(Roles = "TrainingStaff")]
 		public ActionResult Create()
 		{
 			var viewModel = new TopicCourseViewModel
@@ -55,12 +55,12 @@ namespace Training_FPT0.Controllers
 				return View();
 			}
 
-			if (_context.Topics.Any(p => p.Name.Contains(topic.Name)))
+			//Check if Topic Name existed or not
+			if (_context.Topics.Any(c => c.Name == topic.Name &&
+										  c.CourseId == topic.CourseId))
 			{
-				ModelState.AddModelError("Name", "Topic Name Already Exists.");
-				return View();
+				return View("~/Views/Topics/CheckExists.cshtml");
 			}
-
 			var newTopic = new Topic
 			{
 				Name = topic.Name,
@@ -95,6 +95,7 @@ namespace Training_FPT0.Controllers
 
 		[HttpGet]
 		[Authorize(Roles = "TrainingStaff")]
+
 		public ActionResult Edit(int id)
 		{
 			var topicInDb = _context.Topics.SingleOrDefault(p => p.Id == id);
@@ -113,6 +114,7 @@ namespace Training_FPT0.Controllers
 
 		[HttpPost]
 		[Authorize(Roles = "TrainingStaff")]
+
 		public ActionResult Edit(Topic topic)
 		{
 			if (!ModelState.IsValid)

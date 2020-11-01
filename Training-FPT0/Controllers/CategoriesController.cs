@@ -21,11 +21,21 @@ namespace Training_FPT0.Controllers
 		public ActionResult Index(string searchCategory)
 		{
 			var categories = _context.Categories.ToList();
+
 			if (!String.IsNullOrEmpty(searchCategory))
 			{
 				categories = categories.FindAll(s => s.Name.Contains(searchCategory));
 			}
+
 			return View(categories);
+		}
+
+
+		[HttpGet]
+		[Authorize(Roles = "TrainingStaff")]
+		public ActionResult Create()
+		{
+			return View();
 		}
 
 		[HttpPost]
