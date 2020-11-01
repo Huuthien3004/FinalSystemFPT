@@ -187,17 +187,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202010220925139_UpdateData.cs" />
-    <Compile Include="Migrations\202010220925139_UpdateData.designer.cs">
-      <DependentUpon>202010220925139_UpdateData.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010251335365_UpCodex.cs" />
-    <Compile Include="Migrations\202010251335365_UpCodex.designer.cs">
-      <DependentUpon>202010251335365_UpCodex.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010311028385_Upccc.cs" />
-    <Compile Include="Migrations\202010311028385_Upccc.designer.cs">
-      <DependentUpon>202010311028385_Upccc.cs</DependentUpon>
+    <Compile Include="Migrations\202011010750346_Upcode.cs" />
+    <Compile Include="Migrations\202011010750346_Upcode.designer.cs">
+      <DependentUpon>202011010750346_Upcode.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -323,14 +315,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202010220925139_UpdateData.resx">
-      <DependentUpon>202010220925139_UpdateData.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010251335365_UpCodex.resx">
-      <DependentUpon>202010251335365_UpCodex.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010311028385_Upccc.resx">
-      <DependentUpon>202010311028385_Upccc.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011010750346_Upcode.resx">
+      <DependentUpon>202011010750346_Upcode.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

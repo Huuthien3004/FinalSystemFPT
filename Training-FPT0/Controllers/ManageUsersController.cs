@@ -21,6 +21,9 @@ namespace Training_FPT0.Controllers
             _context = new ApplicationDbContext();
         }
         // GET: ManageUsers
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+
         public ActionResult UsersWithRoles()
         {
             //declare variable usersWithRoles using the (FROM-IN) function
