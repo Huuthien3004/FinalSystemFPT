@@ -127,20 +127,23 @@ namespace Training_FPT0.Controllers
             return View(usersInDb);
         }
         [Authorize(Roles = "Admin")]
-        public ActionResult ResetPass(ApplicationUser user)
+        public ActionResult ResetPass(string id)
         {
             // Declare the userId variable of Current.User.Identity and access the Id field through GetUserId
-            var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-            userId = user.Id;
-            if (userId != null)
+            var userDB = _context.Users.SingleOrDefault(p => p.Id == id);
+            if (userDB == null)
+            {
+                return HttpNotFound();
+            }
+            if (userDB.Id != null)
             {
                 // userManager by managing new users, bringing new data
                 UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
                 // Delete current password of userManager
-                userManager.RemovePassword(userId);
+                userManager.RemovePassword(userDB.Id);
                 // Replace new password "A456456a @" for userManager
                 String newPassword = "A456456a@";
-                userManager.AddPassword(userId, newPassword);
+                userManager.AddPassword(userDB.Id, newPassword);
             }
             _context.SaveChanges();
             return RedirectToAction("UsersWithRoles", "ManageUsers");
